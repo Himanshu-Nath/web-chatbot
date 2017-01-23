@@ -6,5 +6,5 @@ var conn = mongoose.connection;
 
 conn.on('error', console.error);
 conn.once('open', function() {
-	console.log("DB connected..");
+	console.log("DB Connected Successfully");
 });
