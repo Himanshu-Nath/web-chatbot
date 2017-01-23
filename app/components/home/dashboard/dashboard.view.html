@@ -1,0 +1,46 @@
+<style>   
+    .sideNav {
+        float: right;
+        text-align:left;
+        max-width: 300px;
+        margin: 0;
+        padding: 1em;
+        background: aquamarine;
+    }
+
+    .sideNav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sideNav ul a {
+        text-decoration: none;
+    }
+</style>
+
+<div class="col-md-10 col-md-offset-1">    
+<h2>Home</h2>
+<div ng-controller="DashboardController as DashboardCtrl">
+<nav class="sideNav">
+    <h3>All registered users:</h3>
+      <ul>
+        <li><a href="#">London</a></li>
+        <li><a href="#">Paris</a></li>
+        <li><a href="#">Tokyo</a></li>
+      </ul>
+    </nav>
+<!--<h1>Hi {{DashboardCtrl.user.username}}!</h1>-->
+<p>You're logged in!!</p>
+
+<!--
+<ul>
+    <li ng-repeat="user in vm.allUsers">
+        {{user.username}} ({{user.firstName}} {{user.lastName}})
+        - <a href="#" ng-click="vm.deleteUser(user.id)">Delete</a>
+    </li>
+</ul>
+-->
+<p>&nbsp;</p>
+<p><a href="#/login" class="btn btn-primary">Logout</a></p>
+</div> 
+</div>

@@ -1,0 +1,77 @@
+<div class="col-md-8 col-md-offset-2">    
+<h2>Registered Users</h2>
+<div ng-controller="RegisteredUsersController as RegisteredUsersCtrl">
+
+    <form name="form" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+            <label for="name">User Name</label>
+            <input type="text" name="name" id="name" class="form-control" ng-model="RegisteredUsersCtrl.find.name" required />
+            <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">User Name is required</span>
+        </div>
+        
+        Search with the help of email: <input type="checkbox" ng-model="emailValue" ng-init="emailValue = true">
+        <div ng-if="emailValue">
+            <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
+                <label for="email">E-mail: </label>
+                <input type="email" name="email" id="email" class="form-control" ng-model="RegisteredUsersCtrl.find.email" required />
+                <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">E-mail is required</span>
+            </div>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary" ng-click="RegisteredUsersCtrl.findRegisteredUser()">Find</button>
+            <img ng-if="vm.dataLoading" src="img/loader.gif"/>
+            <a data-ui-sref="home.dashboard" class="btn btn-link">Back</a>
+        </div>
+    </form>
+    
+<p>&nbsp;</p>
+    
+    <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+        <div ng-view></div>
+    
+    <div ng-model="RegisteredUsersCtrl.status" ng-init="RegisteredUsersCtrl.status = false">
+        <table class="table table-hover" ng-if="RegisteredUsersCtrl.status">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Active</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in RegisteredUsersCtrl.result" class="rowId" data-toggle="modal" data-target="#myModal" data-id={{item.userId}} data-name={{item.firstName}}{{item.lastName}}>
+                <td>{{item.firstName}}</td>
+                <td>{{item.lastName}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.active}}</td>
+              </tr>          
+            </tbody>
+      </table>
+    </div>
+    
+    <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Request</h4>
+        </div>
+        <div class="modal-body">
+            <h1 class="modal-body-h1"></h1>
+            <p>Send Friend Request.</p>
+            <button type="button" class="btn btn-info" ng-click="RegisteredUsersCtrl.sendRequest()">Invite</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</div> 
+</div>
